@@ -12,10 +12,10 @@ export default class ProductRepository implements ProductGateway {
     }
 
     var products = result.map(product => new Product({
-        id: new Id(product.get().id),
-        name: product.get().name,
-        description: product.get().description,
-        salesPrice: product.get().salesPrice,
+        id: new Id(product.id),
+        name: product.name,
+        description: product.description,
+        salesPrice: product.salesPrice,
       })
     );
 
@@ -23,6 +23,19 @@ export default class ProductRepository implements ProductGateway {
   }
 
    async findById(id: string): Promise<Product> {
-    throw new Error(`Method not implement`)
- }  
+    const product = await ProductModel.findOne({ where: { id: id }});
+
+    if (!product) {
+      throw new Error(`Product with id ${id} not found`)
+    }
+
+    const props = {
+      id: new Id(product.id),
+      name: product.name,
+      description: product.description,
+      salesPrice: product.salesPrice,
+    }
+
+    return new Product(props);
+  }  
 }
