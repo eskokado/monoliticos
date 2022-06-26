@@ -15,7 +15,7 @@ export interface FindAllStoreCatalogFacadeOutputDto{
     name: string;
     description: string;
     salesPrice: number;
-  };
+  }[];
 }
 
 export default interface StoreCatalogFacadeInterface {

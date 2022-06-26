@@ -21,6 +21,6 @@ export default class StoreCatalogFacade implements StoreCatalogFacadeInterface {
     return this._findUseCase.execute(id);
   }
   findAll(): Promise<FindAllStoreCatalogFacadeOutputDto> {
-    throw new Error("Methodo não implementado");
+    return this._findAllUseCase.execute();
   }
 }
