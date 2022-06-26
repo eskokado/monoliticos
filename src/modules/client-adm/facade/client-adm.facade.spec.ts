@@ -42,4 +42,26 @@ describe("ClientAdmFacade test", () => {
     expect(input.email).toEqual(clientDb.email);
     expect(input.address).toEqual(clientDb.address); 
    });
+
+  it("should find a client", async () => {
+    const client = {
+      id: "1",
+      name: "Client 1",
+      email: "email@client1.com",
+      address: "Address Client 1",
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+
+    const facade = ClientAdmFacadeFactory.create();
+    await ClientModel.create(client);
+
+    const result = await facade.findClient({id: "1"});
+
+    expect(result.id).toEqual(client.id);
+    expect(result.name).toEqual(client.name);
+    expect(result.email).toEqual(client.email);
+    expect(result.address).toEqual(client.address);
+  });
+      
 });
